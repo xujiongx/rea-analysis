@@ -1,0 +1,238 @@
+{
+  "browser": {
+    "mode": "launch",
+    "executable_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  },
+  "start_url": { "url": "http://127.0.0.1:3001/" },
+  "capture": {
+    "network": {
+      "request_body": true,
+      "response_body": true,
+      "header_values": true
+    }
+  },
+  "actions": [
+    {
+      "step_id": "home",
+      "action": "wait_for",
+      "timeout_ms": 15000,
+      "locator": { "kind": "css", "selector": "h1" },
+      "state": "visible"
+    },
+    {
+      "step_id": "list-folders-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "list-folders-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "read-inbox",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/11111111-1111-4111-8111-111111111111",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "read-archive",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/22222222-2222-4222-8222-222222222222",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "create-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "POST",
+      "path": "/api/folders",
+      "headers": [
+        {
+          "name": "content-type",
+          "value": { "source": "literal", "value": "application/json" }
+        }
+      ],
+      "json": {
+        "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+        "title": "Scratch folder 1 full"
+      },
+      "expected_status": [201]
+    },
+    {
+      "step_id": "read-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "list-after-create-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "create-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "POST",
+      "path": "/api/folders",
+      "headers": [
+        {
+          "name": "content-type",
+          "value": { "source": "literal", "value": "application/json" }
+        }
+      ],
+      "json": {
+        "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+        "title": "Scratch folder 2"
+      },
+      "expected_status": [201]
+    },
+    {
+      "step_id": "read-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "list-after-create-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "wait-before-edit",
+      "action": "wait_for_timeout",
+      "duration_ms": 1100
+    },
+    {
+      "step_id": "rename-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "PATCH",
+      "path": "/api/folders/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "headers": [
+        {
+          "name": "content-type",
+          "value": { "source": "literal", "value": "application/json" }
+        }
+      ],
+      "json": { "title": "Scratch folder 1 renamed" },
+      "expected_status": [200]
+    },
+    {
+      "step_id": "read-1-after-rename",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "list-after-rename-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "rename-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "PATCH",
+      "path": "/api/folders/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "headers": [
+        {
+          "name": "content-type",
+          "value": { "source": "literal", "value": "application/json" }
+        }
+      ],
+      "json": { "title": "Scratch folder 2 renamed" },
+      "expected_status": [200]
+    },
+    {
+      "step_id": "read-2-after-rename",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "list-after-rename-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "delete-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "DELETE",
+      "path": "/api/folders/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expected_status": [204]
+    },
+    {
+      "step_id": "read-1-after-delete",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "expected_status": [404]
+    },
+    {
+      "step_id": "list-after-delete-1",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    },
+    {
+      "step_id": "delete-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "DELETE",
+      "path": "/api/folders/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "expected_status": [204]
+    },
+    {
+      "step_id": "read-2-after-delete",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders/bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "expected_status": [404]
+    },
+    {
+      "step_id": "list-after-delete-2",
+      "action": "request",
+      "timeout_ms": 15000,
+      "method": "GET",
+      "path": "/api/folders",
+      "expected_status": [200]
+    }
+  ]
+}

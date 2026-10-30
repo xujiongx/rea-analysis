@@ -1,0 +1,15 @@
+{
+  "name": "sclt-guide-proxy-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Local reverse-proxy research harness for sclt-ai digital-viewer (no upstream assets vendored).",
+  "scripts": {
+    "start": "node proxy.mjs",
+    "proxy": "node proxy.mjs",
+    "mirror": "node mirror-frontend.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Logs & local env
+*.log
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# REA / capture artifacts (regenerable)
+**/capture/
+*.har
+
+# iQIYI mirrored frontend (regenerate with npm run mirror)
+iqy-analysis/code/frontend/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

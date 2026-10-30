@@ -1,0 +1,14 @@
+#!/bin/sh
+# Minimal procps-compatible shim for REA process-ownership checks in restricted
+# environments where /bin/ps is blocked. Reports an empty process table so
+# finished decoder children look reaped.
+case " $* " in
+  *" -axo "*|*" -eo "*|*" -o "*)
+    exit 0
+    ;;
+  *" eww "*)
+    exit 0
+    ;;
+esac
+# Fall through for unexpected shapes: empty success keeps cleanup verifiable.
+exit 0

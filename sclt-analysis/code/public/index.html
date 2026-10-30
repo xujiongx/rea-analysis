@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SCLT 代理实验台</title>
+    <link rel="stylesheet" href="/lab/lab.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <p class="kicker">analysis / code · option C</p>
+      <h1>小科导览 · 本地反向代理</h1>
+      <p class="lede">
+        前端静态资源来自本地 <code>frontend/digital-viewer</code>
+        （状态：{{MIRROR_STATUS}}）。后端
+        <code>/aicc-api</code>、<code>/minio</code>、WebSocket 等代理到
+        <code>{{UPSTREAM}}</code>。
+      </p>
+
+      <ol class="steps">
+        <li>若尚未镜像：<code>UPSTREAM_IP=81.71.197.85 npm run mirror</code></li>
+        <li>启动：<code>UPSTREAM_IP=81.71.197.85 npm start</code></li>
+        <li>打开导览深链；API 在 Network 里应指向本机并回源</li>
+      </ol>
+
+      <p class="actions">
+        <a class="cta" href="{{GUIDE_PATH}}">打开导览深链</a>
+        <a class="ghost" href="/healthz">healthz</a>
+      </p>
+
+      <aside class="warn">
+        <strong>使用边界</strong>
+        仅用于你有权访问的研究/联调。请遵守上游服务条款；不要抓包分发上游静态资源或凭证；签名与业务数据仍由原站服务端校验。
+      </aside>
+
+      <dl class="meta">
+        <div>
+          <dt>Upstream</dt>
+          <dd><code>{{UPSTREAM}}</code> → <code>{{UPSTREAM_IP}}</code> (<code>{{RESOLVE_VIA}}</code>)</dd>
+        </div>
+        <div>
+          <dt>Proxied prefixes</dt>
+          <dd><code>/digital-viewer</code> · <code>/aicc-api</code> · 其他路径同样回源</dd>
+        </div>
+        <div>
+          <dt>Guide path</dt>
+          <dd><code>{{GUIDE_PATH}}</code></dd>
+        </div>
+      </dl>
+    </main>
+  </body>
+</html>

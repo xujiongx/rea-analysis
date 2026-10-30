@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iQIYI 代理实验台</title>
+    <link rel="stylesheet" href="/lab/lab.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <p class="kicker">iqy-analysis / code · research only</p>
+      <h1>爱奇艺 PCW · 本地反向代理</h1>
+      <p class="lede">
+        前端静态资源来自本地 <code>frontend/</code>（状态：{{MIRROR_STATUS}}）。
+        同域路径回源 <code>{{UPSTREAM}}</code>；跨域 API / CDN 经
+        <code>/__p/&lt;host&gt;/...</code> 代理（页面注入 fetch/XHR 改写）。
+      </p>
+
+      <ol class="steps">
+        <li>镜像：<code>npm run mirror</code></li>
+        <li>启动：<code>npm start</code></li>
+        <li>打开首页；Network 里 mesh / static 应变为 <code>/__p/...</code></li>
+      </ol>
+
+      <p class="actions">
+        <a class="cta" href="/">打开镜像首页</a>
+        <a class="ghost" href="/healthz">healthz</a>
+      </p>
+
+      <aside class="warn">
+        <strong>使用边界</strong>
+        仅用于有权访问的前端架构研究。请遵守
+        <a href="https://www.iqiyi.com/">爱奇艺</a>
+        服务条款；不要分发上游静态资源或凭证；不做 DRM / 鉴权绕过 / 盗链播放。
+      </aside>
+
+      <dl class="meta">
+        <div>
+          <dt>Upstream</dt>
+          <dd>
+            <code>{{UPSTREAM}}</code> → <code>{{UPSTREAM_IP}}</code>
+            (<code>{{RESOLVE_VIA}}</code>)
+          </dd>
+        </div>
+        <div>
+          <dt>Proxied hosts</dt>
+          <dd><code>{{PROXY_HOSTS}}</code></dd>
+        </div>
+        <div>
+          <dt>Port</dt>
+          <dd><code>{{PORT}}</code></dd>
+        </div>
+      </dl>
+    </main>
+  </body>
+</html>

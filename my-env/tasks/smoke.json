@@ -1,0 +1,15 @@
+[
+  {
+    "id": "env",
+    "type": "deploy_env",
+    "env_id": "my-env",
+    "sandbox_type": "local"
+  },
+  {
+    "id": "serve",
+    "type": "env_outcome_verifier",
+    "env_id": "my-env",
+    "file_artifact_id": "check_my-env",
+    "verifier_id": "serve"
+  }
+]

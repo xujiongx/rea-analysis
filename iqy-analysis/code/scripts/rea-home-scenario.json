@@ -1,0 +1,30 @@
+{
+  "browser": {
+    "mode": "launch",
+    "executable_path": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  },
+  "start_url": { "url": "https://www.iqiyi.com/" },
+  "capture": {
+    "network": {
+      "request_body": false,
+      "response_body": true,
+      "header_values": true
+    }
+  },
+  "actions": [
+    {
+      "step_id": "home-ready",
+      "action": "wait_for",
+      "timeout_ms": 25000,
+      "locator": { "kind": "css", "selector": "#root" },
+      "state": "visible"
+    },
+    {
+      "step_id": "settle",
+      "action": "wait_for",
+      "timeout_ms": 8000,
+      "locator": { "kind": "css", "selector": "input[aria-label='Search'], #searchinput input, [name^='search']" },
+      "state": "visible"
+    }
+  ]
+}
